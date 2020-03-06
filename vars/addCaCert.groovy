@@ -10,6 +10,7 @@ def jsonParse(def json) {
 
 def call(auth,serviceName,location,org,namespace,cluster,findrZone, findrUsername, findrPassword,zoneName) {
 
+    print "in pipeline library"
     //initial authentication
     def response = httpRequest httpMode: 'POST',
             url: 'https://portr.ctl.io/portr/authenticate',
