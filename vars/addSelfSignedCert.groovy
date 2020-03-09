@@ -5,7 +5,7 @@ def jsonParse(def json) {
     new groovy.json.JsonSlurperClassic().parseText(json)
 }
 
-def call(auth,serviceName,location,org,namespace,cluster) {
+def call(auth,serviceName,location,org,namespace,cluster,dns) {
 
     print "-----------------addSelfSignedCert------------------------------"
     //initial authentication
@@ -37,11 +37,11 @@ def call(auth,serviceName,location,org,namespace,cluster) {
                 "    \"namespace\": \"" + namespace + "\",                          " +
                 "    \"durationDays\": 90,                                          " +
                 "    \"renewalDays\": 30,                                           " +
-                "    \"subject\": \"" + serviceName + ".sso-mastr.ctl.io\",         " +
+                "    \"subject\": \"" + serviceName + '.' + dns + "\",              " +
                 "    \"subjectAlternativeNames\": [                                 " +
                 "        {                                                          " +
                 "            \"type\": \"DNS\",                                     " +
-                "            \"value\": \"" + serviceName + ".sso-mastr.ctl.io\"    " +
+                "            \"value\": \"" + serviceName +  '.' + dns + "\",       " +
                 "        }                                                          " +
                 "    ]                                                              " +
                 "}                                                                  " +
