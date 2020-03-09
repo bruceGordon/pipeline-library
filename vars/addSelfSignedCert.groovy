@@ -47,7 +47,7 @@ def call(auth,serviceName,location,org,namespace,cluster,dns) {
                 "    ]                                                              " +
                 "}                                                                  " +
                 "}"
-
+        print payload
         //request to get the records
         httpRequest httpMode: 'POST',
                 contentType: 'APPLICATION_JSON',
