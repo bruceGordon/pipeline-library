@@ -42,7 +42,7 @@ def call(auth,serviceName,location,org,namespace,cluster,dns) {
                 "    \"subjectAlternativeNames\": [                                 " +
                 "        {                                                          " +
                 "            \"type\": \"DNS\",                                     " +
-                "            \"value\": \"" + serviceName +  '.' + dns + "\",       " +
+                "            \"value\": \"" + serviceName +  '.' + dns + "\"       " +
                 "        }                                                          " +
                 "    ]                                                              " +
                 "}                                                                  " +
