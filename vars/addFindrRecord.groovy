@@ -10,6 +10,7 @@ def jsonParse(def json) {
 
 def call(auth, zoneid, serviceName,loadBalancer,findrURL,portrAuthURL) {
 
+    print "-----------------addFindrRecord------------------------------"
     //initial authentication
     def response = httpRequest httpMode: 'POST',
             url: portrAuthURL,
