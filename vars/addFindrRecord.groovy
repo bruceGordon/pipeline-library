@@ -1,6 +1,5 @@
 #!/usr/bin/env groovy
 
-import groovy.json.JsonSlurperClassic
 import groovy.json.JsonOutput;
 
 @NonCPS
