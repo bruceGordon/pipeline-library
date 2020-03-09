@@ -7,6 +7,7 @@ def jsonParse(def json) {
 
 def call(auth,serviceName,location,org,namespace,cluster,dns) {
 
+    print auth + serviceName + location + org + namespace + cluster + dns
     print "-----------------addSelfSignedCert------------------------------"
     //initial authentication
     def response = httpRequest httpMode: 'POST',
