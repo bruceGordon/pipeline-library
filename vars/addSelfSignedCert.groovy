@@ -3,6 +3,10 @@
 import groovy.json.JsonSlurperClassic
 import groovy.json.JsonOutput;
 
+@NonCPS
+def jsonParse(def json) {
+    new groovy.json.JsonSlurperClassic().parseText(json)
+}
 
 def call(auth,serviceName,location,org,namespace,cluster) {
 
