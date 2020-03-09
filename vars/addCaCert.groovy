@@ -46,7 +46,7 @@ def call(auth,serviceName,location,org,namespace,cluster,findrZone, findrUsernam
                 "}"
 
         //request to get the records
-        response = httpRequest httpMode: 'POST',
+        httpRequest httpMode: 'POST',
                 contentType: 'APPLICATION_JSON',
                 requestBody: payload,
                 url: 'https://fastr.ctl.io/api/orgs/sso/mastrapplications',
