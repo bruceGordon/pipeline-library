@@ -41,12 +41,20 @@ def call(auth, zoneid, serviceName,loadBalancer,findrURL,portrAuthURL) {
                 type: "A",
                 values: [loadBalancer]
         ]
-        response = httpRequest httpMode: 'POST',
+        httpRequest httpMode: 'POST',
                 requestBody: JsonOutput.toJson(payload2),
                 contentType: 'APPLICATION_JSON',
                 url: findrURL + 'zones/'+ zoneid + '/records',
                 customHeaders: [[name:'Authorization', value:"Bearer ${authJson.token}"]]
-        recordsJson = jsonParse(response.content)
-        print recordsJson
+        //request to get the records
+        response = httpRequest httpMode: 'POST',
+                contentType: 'TEXT_PLAIN',
+                requestBody: "{ zone( zoneId :" + '\"' + zoneid + "\" ) { records { name } } }",
+                url: findrURL,
+                customHeaders:[[name:'Authorization', value:"Bearer ${authJson.token}"]]
+
+        def json = jsonParse(response.content)
+        return json.get("spec").get("findrRecord")
+
     }
 }
