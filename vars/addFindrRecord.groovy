@@ -33,6 +33,7 @@ def call(auth, zoneid, serviceName,loadBalancer,findrURL,portrAuthURL) {
     recordsJson.zone.records.each {
         if (serviceName == it.name) {
             recordFound = true
+            print it.id
             return it.id
         }
     }
