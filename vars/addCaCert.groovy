@@ -23,7 +23,7 @@ def call(auth,serviceName,location,org,namespace,cluster,findrZone, findrUsernam
             customHeaders:[[name:'Authorization', value:"Bearer ${portrToken}"]]
 
     if (response.status == 404) {
-
+        print "create ca cert"
         def payload =" { " +
                 " \"metadata\": {                                                   " +
                 "    \"location\": \"" + location + "\",                            " +

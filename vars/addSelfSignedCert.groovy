@@ -23,6 +23,7 @@ def call(auth,serviceName,location,org,namespace,cluster,dns) {
             customHeaders:[[name:'Authorization', value:"Bearer ${portrToken}"]]
 
     if (response.status == 404) {
+        print "create self signed cert"
         //create the cert
         def payload =" { " +
                 " \"metadata\": {                                                   " +
