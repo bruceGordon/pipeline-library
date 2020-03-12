@@ -27,6 +27,7 @@ def call(auth, zoneid, serviceName,loadBalancer,findrURL,portrAuthURL) {
             customHeaders:[[name:'Authorization', value:"Bearer ${authJson.token}"]]
 
     def recordsJson = jsonParse(response.content)
+    print recordsJson
     def recordFound = false
 
     recordsJson.zone.records.each {
@@ -54,7 +55,7 @@ def call(auth, zoneid, serviceName,loadBalancer,findrURL,portrAuthURL) {
         //request to get the records
         response = httpRequest httpMode: 'POST',
                 contentType: 'TEXT_PLAIN',
-                requestBody: "{ zone( zoneId :" + '\"' + zoneid + "\" ) { records { name id} } }",
+                requestBody: "{ zone( zoneId :" + '\"' + zoneid + "\" ) { records { name id } } }",
                 url: findrURL,
                 customHeaders:[[name:'Authorization', value:"Bearer ${authJson.token}"]]
 
