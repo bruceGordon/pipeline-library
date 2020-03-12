@@ -53,7 +53,7 @@ def call(auth, zoneid, serviceName,loadBalancer,findrURL,portrAuthURL) {
         //request to get the records
         response = httpRequest httpMode: 'POST',
                 contentType: 'TEXT_PLAIN',
-                requestBody: "{ zone( zoneId :" + '\"' + zoneid + "\" ) { records { name } } }",
+                requestBody: "{ zone( zoneId :" + '\"' + zoneid + "\" ) { records { name,it} } }",
                 url: findrURL,
                 customHeaders:[[name:'Authorization', value:"Bearer ${authJson.token}"]]
 
