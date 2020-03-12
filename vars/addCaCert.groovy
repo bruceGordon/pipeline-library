@@ -5,7 +5,7 @@ def jsonParse(def json) {
     new groovy.json.JsonSlurperClassic().parseText(json)
 }
 
-def call(auth,serviceName,location,org,namespace,cluster,findrZone, findrUsername, findrPassword,zoneName) {
+def call(auth,serviceName,location,org,namespace,cluster,findrZone, findrUsername, findrPassword,zoneName,findrRecord,endpoint) {
 
     print "-----------------addCaCert------------------------------"
     //initial authentication
@@ -39,6 +39,8 @@ def call(auth,serviceName,location,org,namespace,cluster,findrZone, findrUsernam
                 "    \"findrZone\":  \"" + findrZone + "\",                         " +
                 "    \"findrZoneName\":\"" + zoneName + "\",                   " +
                 "    \"findrUsername\": \"" + findrUsername + "\",                  " +
+                "    \"findrRecord\": \"" + findrRecord + "\",                  " +
+                "    \"endpoint\": \"" + endpoint + "\",                  " +
                 "    \"subject\": \"" + serviceName + "." + zoneName + "\",       " +
                 "    \"findrPassword\": \"" + findrPassword + "\",                  " +
                 "    \"findrRecordName\": \"" + serviceName + "\"                    " +
