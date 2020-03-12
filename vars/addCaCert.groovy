@@ -8,6 +8,9 @@ def jsonParse(def json) {
 def call(auth,serviceName,location,org,namespace,cluster,findrZone, findrUsername, findrPassword,zoneName,findrRecord,endpoint) {
 
     print "-----------------addCaCert------------------------------"
+    echo "Input Parameters auth = ${auth},serviceName = ${serviceName}, location = ${location}, org = ${org}, namespace = ${namespace} "
+    echo "More Input Parameters cluster = ${cluster},findrZone = ${findrZone},  zoneName = ${zoneName}, findrRecord = ${findrRecord} ,endpoint = ${endpoint} "
+
     //initial authentication
     def response = httpRequest httpMode: 'POST',
             url: 'https://portr.ctl.io/portr/authenticate',
