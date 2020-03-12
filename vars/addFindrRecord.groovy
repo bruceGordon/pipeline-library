@@ -11,7 +11,7 @@ def jsonParse(def json) {
 def call(auth, zoneid, serviceName,loadBalancer,findrURL,portrAuthURL) {
 
     print "-----------------addFindrRecord------------------------------"
-    print auth, zoneid, serviceName,loadBalancer,findrURL,portrAuthURL
+    print auth zoneid serviceName loadBalancer findrURL portrAuthURL
 
     //initial authentication
     def response = httpRequest httpMode: 'POST',
