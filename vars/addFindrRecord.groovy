@@ -33,8 +33,8 @@ def call(auth, zoneid, serviceName,loadBalancer,findrURL,portrAuthURL) {
     recordsJson.zone.records.each {
         if (serviceName == it.name) {
             recordFound = true
-            print it.id
-            return it.id
+            def id = it.id
+            return id
         }
     }
 
@@ -64,7 +64,8 @@ def call(auth, zoneid, serviceName,loadBalancer,findrURL,portrAuthURL) {
 
         recordsJson.zone.records.each {
             if (serviceName == it.name) {
-                return it.id
+                def id = it.id
+                return id
             }
         }
 
