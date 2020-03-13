@@ -7,6 +7,26 @@ def jsonParse(def json) {
     new groovy.json.JsonSlurperClassic().parseText(json)
 }
 
+def getFindrRecord(zoneid,findrURL,authJson) {
+    def id = ''
+    //request to get the records
+    response = httpRequest httpMode: 'POST',
+            contentType: 'TEXT_PLAIN',
+            requestBody: "{ zone( zoneId :" + '\"' + zoneid + "\" ) { records { name id } } }",
+            url: findrURL,
+            customHeaders:[[name:'Authorization', value:"Bearer ${authJson.token}"]]
+
+    def recordsJson = jsonParse(response.content)
+    def recordFound = false
+
+    recordsJson.zone.records.each {
+        if (serviceName == it.name) {
+            recordFound = true
+            id = it.id
+        }
+    }
+    return id;
+}
 
 def call(auth, zoneid, serviceName,loadBalancer,findrURL,portrAuthURL) {
 
@@ -18,26 +38,7 @@ def call(auth, zoneid, serviceName,loadBalancer,findrURL,portrAuthURL) {
             url: portrAuthURL,
             customHeaders:[[name:'Authorization', value:"Basic ${auth}"]]
     def authJson = jsonParse(response.content)
-    def id = ''
-
-    //request to get the records
-    response = httpRequest httpMode: 'POST',
-            contentType: 'TEXT_PLAIN',
-            requestBody: "{ zone( zoneId :" + '\"' + zoneid + "\" ) { records { name id } } }",
-            url: findrURL,
-            customHeaders:[[name:'Authorization', value:"Bearer ${authJson.token}"]]
-
-    def recordsJson = jsonParse(response.content)
-    print recordsJson
-    def recordFound = false
-
-    recordsJson.zone.records.each {
-        if (serviceName == it.name) {
-            recordFound = true
-            id = it.id
-
-        }
-    }
+    def id = getFindrRecord(zoneid,findrURL,authJson)
 
     //add record if it not already present
     if (recordFound == false) {
@@ -54,21 +55,7 @@ def call(auth, zoneid, serviceName,loadBalancer,findrURL,portrAuthURL) {
                 url: findrURL + 'zones/'+ zoneid + '/records',
                 customHeaders: [[name:'Authorization', value:"Bearer ${authJson.token}"]]
 
-        //request to get the records
-        response = httpRequest httpMode: 'POST',
-                contentType: 'TEXT_PLAIN',
-                requestBody: "{ zone( zoneId :" + '\"' + zoneid + "\" ) { records { name id } } }",
-                url: findrURL,
-                customHeaders:[[name:'Authorization', value:"Bearer ${authJson.token}"]]
-
-        recordsJson = jsonParse(response.content)
-
-        recordsJson.zone.records.each {
-            if (serviceName == it.name) {
-                id = it.id
-
-            }
-        }
+        id = getFindrRecord(zoneid,findrURL,authJson)
 
     }
     return id;
