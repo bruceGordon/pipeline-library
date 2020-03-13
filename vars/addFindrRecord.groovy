@@ -9,7 +9,7 @@ def jsonParse(def json) {
 
 def getFindrRecord(zoneid,findrURL,authJson,serviceName) {
 
-    def id = ''
+    def findrId = ''
     //request to get the records
     response = httpRequest httpMode: 'POST',
             contentType: 'TEXT_PLAIN',
@@ -21,10 +21,10 @@ def getFindrRecord(zoneid,findrURL,authJson,serviceName) {
 
     recordsJson.zone.records.each {
         if (serviceName == it.name) {
-            id = it.id
+            findrId = it.id
         }
     }
-    return id;
+    return findrId;
 }
 
 def call(auth, zoneid, serviceName,loadBalancer,findrURL,portrAuthURL) {
@@ -54,8 +54,8 @@ def call(auth, zoneid, serviceName,loadBalancer,findrURL,portrAuthURL) {
                 url: findrURL + 'zones/'+ zoneid + '/records',
                 customHeaders: [[name:'Authorization', value:"Bearer ${authJson.token}"]]
 
-        id = getFindrRecord(zoneid,findrURL,authJson,serviceName)
+        findrId = getFindrRecord(zoneid,findrURL,authJson,serviceName)
 
     }
-    return id;
+    return findrId;
 }
