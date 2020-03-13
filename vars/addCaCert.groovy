@@ -53,7 +53,7 @@ def call(auth,serviceName,location,org,namespace,cluster,findrZone, findrUsernam
         httpRequest httpMode: 'POST',
                 contentType: 'APPLICATION_JSON',
                 requestBody: payload,
-                url: 'https://fastr.ctl.io/api/orgs/sso/mastrapplications',
+                url: 'https://fastr.ctl.io/api/orgs/' + org + '/mastrapplications',
                 customHeaders:[[name:'Authorization', value:"Bearer ${portrToken}"]]
     }
 
