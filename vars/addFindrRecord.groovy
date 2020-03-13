@@ -18,6 +18,7 @@ def call(auth, zoneid, serviceName,loadBalancer,findrURL,portrAuthURL) {
             url: portrAuthURL,
             customHeaders:[[name:'Authorization', value:"Basic ${auth}"]]
     def authJson = jsonParse(response.content)
+    def id = ''
 
     //request to get the records
     response = httpRequest httpMode: 'POST',
@@ -33,9 +34,8 @@ def call(auth, zoneid, serviceName,loadBalancer,findrURL,portrAuthURL) {
     recordsJson.zone.records.each {
         if (serviceName == it.name) {
             recordFound = true
-            def id = it.id
-            print id
-            return id
+            id = it.id
+
         }
     }
 
@@ -65,10 +65,11 @@ def call(auth, zoneid, serviceName,loadBalancer,findrURL,portrAuthURL) {
 
         recordsJson.zone.records.each {
             if (serviceName == it.name) {
-                def id = it.id
-                return id
+                id = it.id
+
             }
         }
 
     }
+    return id;
 }
