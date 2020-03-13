@@ -8,8 +8,8 @@ def jsonParse(def json) {
 def call(auth,serviceName,location,org,namespace,cluster,findrZone, findrUsername, findrPassword,zoneName,findrRecord,endpoint) {
 
     print "-----------------addCaCert------------------------------"
-    echo "Input Parameters auth = ${auth},serviceName = ${serviceName}, location = ${location}, org = ${org}, namespace = ${namespace} "
-    echo "More Input Parameters cluster = ${cluster},findrZone = ${findrZone},  zoneName = ${zoneName}, findrRecord = ${findrRecord} ,endpoint = ${endpoint} "
+    echo "Input Parameters serviceName = ${serviceName}, org = ${org}, namespace = ${namespace} "
+    echo "More Input Parameters cluster = ${cluster},  zoneName = ${zoneName}, findrRecord = ${findrRecord} ,endpoint = ${endpoint} "
 
     //initial authentication
     def response = httpRequest httpMode: 'POST',

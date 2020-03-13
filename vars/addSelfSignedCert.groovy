@@ -9,7 +9,7 @@ def call(auth,serviceName,location,org,namespace,cluster,dns) {
 
     print "-----------------addSelfSignedCert------------------------------"
 
-    echo "Input Parameters serviceName = ${serviceName}, location = ${location}, org = ${org}, cluster = ${cluster}, dns = ${dns} "
+    echo "Input Parameters serviceName = ${serviceName}, org = ${org}, cluster = ${cluster}, dns = ${dns} "
 
     //initial authentication
     def response = httpRequest httpMode: 'POST',

@@ -30,7 +30,7 @@ def getFindrRecord(zoneid,findrURL,authJson,serviceName) {
 def call(auth, zoneid, serviceName,loadBalancer,findrURL,portrAuthURL) {
 
     print "-----------------addFindrRecord------------------------------"
-    echo "Input Parameters zoneid =  ${zoneid}, serviceName = ${serviceName}, loadBalancer = ${loadBalancer}, findrURL = ${findrURL}, portrAuthURL = ${portrAuthURL} "
+    echo "Input Parameters  serviceName = ${serviceName}, loadBalancer = ${loadBalancer}, findrURL = ${findrURL}, portrAuthURL = ${portrAuthURL} "
 
     //initial authentication
     def response = httpRequest httpMode: 'POST',
