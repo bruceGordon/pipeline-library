@@ -34,6 +34,7 @@ def call(auth, zoneid, serviceName,loadBalancer,findrURL,portrAuthURL) {
         if (serviceName == it.name) {
             recordFound = true
             def id = it.id
+            print id
             return id
         }
     }
