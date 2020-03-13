@@ -49,7 +49,7 @@ def call(auth,serviceName,location,org,namespace,cluster,findrZone, findrUsernam
                 "    \"findrRecordName\": \"" + serviceName + "\"                    " +
                 "}                                                                  " +
                 "}"
-
+        print payload
         //request to get the records
         httpRequest httpMode: 'POST',
                 contentType: 'APPLICATION_JSON',
