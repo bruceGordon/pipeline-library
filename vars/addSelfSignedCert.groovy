@@ -22,7 +22,7 @@ def call(auth,serviceName,location,org,namespace,cluster,dns) {
     response = httpRequest httpMode: 'GET',
             contentType: 'APPLICATION_JSON',
             validResponseCodes: '200:405',
-            url: 'https://fastr.ctl.io/api/orgs/sso/mastrapplication/' + serviceName,
+            url: 'https://fastr.ctl.io/api/orgs/' + org + '/mastrapplication/' + serviceName,
             customHeaders:[[name:'Authorization', value:"Bearer ${portrToken}"]]
 
     if (response.status == 404) {
