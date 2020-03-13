@@ -8,6 +8,7 @@ def jsonParse(def json) {
 }
 
 def getFindrRecord(zoneid,findrURL,authJson,serviceName) {
+
     def id = ''
     //request to get the records
     response = httpRequest httpMode: 'POST',
@@ -17,11 +18,9 @@ def getFindrRecord(zoneid,findrURL,authJson,serviceName) {
             customHeaders:[[name:'Authorization', value:"Bearer ${authJson.token}"]]
 
     def recordsJson = jsonParse(response.content)
-    def recordFound = false
 
     recordsJson.zone.records.each {
         if (serviceName == it.name) {
-            recordFound = true
             id = it.id
         }
     }
@@ -38,10 +37,10 @@ def call(auth, zoneid, serviceName,loadBalancer,findrURL,portrAuthURL) {
             url: portrAuthURL,
             customHeaders:[[name:'Authorization', value:"Basic ${auth}"]]
     def authJson = jsonParse(response.content)
-    def id = getFindrRecord(zoneid,findrURL,authJson,serviceName)
+    def findrId = getFindrRecord(zoneid,findrURL,authJson,serviceName)
 
     //add record if it not already present
-    if (recordFound == false) {
+    if (findrId.length() == 0) {
         print "create findr record"
         def payload2 = [
                 name: serviceName,
