@@ -9,7 +9,7 @@ def call(auth,serviceName,location,org,namespace,cluster,findrZone, findrUsernam
 
     print "-----------------addCaCert------------------------------"
     echo "Input Parameters serviceName = ${serviceName}, org = ${org}, namespace = ${namespace} "
-    echo "More Input Parameters cluster = ${cluster},  zoneName = ${zoneName}, findrRecord = ${findrRecord} ,endpoint = ${endpoint} "
+    echo ", cluster = ${cluster},  zoneName = ${zoneName}, findrRecord = ${findrRecord} ,endpoint = ${endpoint} "
 
     //initial authentication
     def response = httpRequest httpMode: 'POST',
