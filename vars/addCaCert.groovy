@@ -11,7 +11,7 @@ def call(auth,serviceName,location,org,namespace,cluster,findrZone, findrUsernam
     echo "Input Parameters serviceName = ${serviceName}, org = ${org}, namespace = ${namespace} , cluster = ${cluster},  lab = ${lab}, findrRecord = ${findrRecord} ,endpoint = ${endpoint} "
 
     def dns = serviceName
-    if (lab.length() > 0) {
+    if (lab != "prod") {
         dns = dns + '.' + lab;
     }
 

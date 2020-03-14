@@ -12,7 +12,7 @@ def call(auth,serviceName,location,org,namespace,cluster,lab) {
     echo "Input Parameters serviceName = ${serviceName}, org = ${org}, cluster = ${cluster}, lab = ${lab} "
 
     def dns = serviceName
-    if (lab.length() > 0) {
+    if (lab != "prod") {
         dns = dns + '.' + lab;
     }
 

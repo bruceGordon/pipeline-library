@@ -39,7 +39,7 @@ def call(auth, zoneid, serviceName,lab, loadBalancer,findrURL,portrAuthURL) {
             customHeaders:[[name:'Authorization', value:"Basic ${auth}"]]
     def authJson = jsonParse(response.content)
     def dns = serviceName
-    if (lab.length() > 0) {
+    if (lab != "prod") {
         dns = dns + '.' + lab;
     }
     def findrId = getFindrRecord(zoneid,findrURL,authJson,dns)
