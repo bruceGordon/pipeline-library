@@ -14,6 +14,7 @@ def call(auth,serviceName,location,org,namespace,cluster,findrZone, findrUsernam
     if (lab != "prod") {
         dns = dns + '.' + lab;
     }
+    url = dns + "." + zoneName
 
     //initial authentication
     def response = httpRequest httpMode: 'POST',
@@ -48,7 +49,7 @@ def call(auth,serviceName,location,org,namespace,cluster,findrZone, findrUsernam
                 "    \"findrUsername\": \"" + findrUsername + "\",                  " +
                 "    \"findrRecord\": \"" + findrRecord + "\",                      " +
                 "    \"endpoint\": \"" + endpoint + "\",                            " +
-                "    \"subject\": \"" + dns + "\",                                  " +
+                "    \"subject\": \"" + url + "\",                                  " +
                 "    \"findrPassword\": \"" + findrPassword + "\",                  " +
                 "    \"findrRecordName\": \"" + dns +"\"              " +
                 "}                                                                  " +

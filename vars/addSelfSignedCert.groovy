@@ -5,7 +5,7 @@ def jsonParse(def json) {
     new groovy.json.JsonSlurperClassic().parseText(json)
 }
 
-def call(auth,serviceName,location,org,namespace,cluster,lab) {
+def call(auth,serviceName,location,org,namespace,cluster,lab,zoneName) {
 
     print "-----------------addSelfSignedCert------------------------------"
 
@@ -15,6 +15,7 @@ def call(auth,serviceName,location,org,namespace,cluster,lab) {
     if (lab != "prod") {
         dns = dns + '.' + lab;
     }
+    url = dns + "." + zoneName
 
     //initial authentication
     def response = httpRequest httpMode: 'POST',
@@ -46,11 +47,11 @@ def call(auth,serviceName,location,org,namespace,cluster,lab) {
                 "    \"namespace\": \"" + namespace + "\",                          " +
                 "    \"durationDays\": 90,                                          " +
                 "    \"renewalDays\": 30,                                           " +
-                "    \"subject\": \"" + dns   + "\",                                " +
+                "    \"subject\": \"" + url   + "\",                                " +
                 "    \"subjectAlternativeNames\": [                                 " +
                 "        {                                                          " +
                 "            \"type\": \"DNS\",                                     " +
-                "            \"value\": \"" + dns + "\",                            " +
+                "            \"value\": \"" + url + "\",                            " +
                 "        }                                                          " +
                 "    ]                                                              " +
                 "}                                                                  " +
