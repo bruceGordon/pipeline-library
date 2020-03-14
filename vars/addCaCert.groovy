@@ -5,10 +5,14 @@ def jsonParse(def json) {
     new groovy.json.JsonSlurperClassic().parseText(json)
 }
 
-def call(auth,serviceName,location,org,namespace,cluster,findrZone, findrUsername, findrPassword,zoneName,findrRecord,endpoint) {
+def call(auth,serviceName,location,org,namespace,cluster,findrZone, findrUsername, findrPassword,lab,findrRecord,endpoint) {
 
     print "-----------------addCaCert------------------------------"
-    echo "Input Parameters serviceName = ${serviceName}, org = ${org}, namespace = ${namespace} , cluster = ${cluster},  zoneName = ${zoneName}, findrRecord = ${findrRecord} ,endpoint = ${endpoint} "
+    echo "Input Parameters serviceName = ${serviceName}, org = ${org}, namespace = ${namespace} , cluster = ${cluster},  lab = ${lab}, findrRecord = ${findrRecord} ,endpoint = ${endpoint} "
+
+    if (lab.length() > 0) {
+        url = url + '.' + lab;
+    }
 
     //initial authentication
     def response = httpRequest httpMode: 'POST',
@@ -43,9 +47,9 @@ def call(auth,serviceName,location,org,namespace,cluster,findrZone, findrUsernam
                 "    \"findrUsername\": \"" + findrUsername + "\",                  " +
                 "    \"findrRecord\": \"" + findrRecord + "\",                  " +
                 "    \"endpoint\": \"" + endpoint + "\",                  " +
-                "    \"subject\": \"" + serviceName + "." + zoneName + "\",       " +
+                "    \"subject\": \"" + url "\",       " +
                 "    \"findrPassword\": \"" + findrPassword + "\",                  " +
-                "    \"findrRecordName\": \"" + serviceName + "\"                    " +
+                "    \"findrRecordName\": \"" + serviceName + lab +"\"                    " +
                 "}                                                                  " +
                 "}"
         print payload

@@ -7,9 +7,14 @@ def jsonParse(def json) {
     new groovy.json.JsonSlurperClassic().parseText(json)
 }
 
-def getFindrRecord(zoneid,findrURL,authJson,serviceName) {
+def getFindrRecord(zoneid,findrURL,authJson,serviceName,lab) {
 
     def findrId = ''
+    def dns = serviceName
+    if (lab.length() > 0) {
+        dns = dns + '.' + lab;
+    }
+
     //request to get the records
     response = httpRequest httpMode: 'POST',
             contentType: 'TEXT_PLAIN',
@@ -20,17 +25,17 @@ def getFindrRecord(zoneid,findrURL,authJson,serviceName) {
     def recordsJson = jsonParse(response.content)
 
     recordsJson.zone.records.each {
-        if (serviceName == it.name) {
+        if (dns == it.name) {
             findrId = it.id
         }
     }
     return findrId;
 }
 
-def call(auth, zoneid, serviceName,loadBalancer,findrURL,portrAuthURL) {
+def call(auth, zoneid, serviceName,lab, loadBalancer,findrURL,portrAuthURL) {
 
     print "-----------------addFindrRecord------------------------------"
-    echo "Input Parameters  serviceName = ${serviceName}, loadBalancer = ${loadBalancer}, findrURL = ${findrURL}, portrAuthURL = ${portrAuthURL} "
+    echo "Input Parameters  serviceName = ${serviceName}, lab = ${lab},loadBalancer = ${loadBalancer}, findrURL = ${findrURL}, portrAuthURL = ${portrAuthURL} "
 
     //initial authentication
     def response = httpRequest httpMode: 'POST',
@@ -38,6 +43,10 @@ def call(auth, zoneid, serviceName,loadBalancer,findrURL,portrAuthURL) {
             customHeaders:[[name:'Authorization', value:"Basic ${auth}"]]
     def authJson = jsonParse(response.content)
     def findrId = getFindrRecord(zoneid,findrURL,authJson,serviceName)
+    def dns = serviceName
+    if (lab.length() > 0) {
+        dns = dns + '.' + lab;
+    }
 
     //add record if it not already present
     if (findrId.length() == 0) {
@@ -54,7 +63,7 @@ def call(auth, zoneid, serviceName,loadBalancer,findrURL,portrAuthURL) {
                 url: findrURL + 'zones/'+ zoneid + '/records',
                 customHeaders: [[name:'Authorization', value:"Bearer ${authJson.token}"]]
 
-        findrId = getFindrRecord(zoneid,findrURL,authJson,serviceName)
+        findrId = getFindrRecord(zoneid,findrURL,authJson,dns)
 
     }
     return findrId;
