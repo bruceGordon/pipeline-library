@@ -7,13 +7,9 @@ def jsonParse(def json) {
     new groovy.json.JsonSlurperClassic().parseText(json)
 }
 
-def getFindrRecord(zoneid,findrURL,authJson,serviceName,lab) {
+def getFindrRecord(zoneid,findrURL,authJson,dns) {
 
     def findrId = ''
-    def dns = serviceName
-    if (lab.length() > 0) {
-        dns = dns + '.' + lab;
-    }
 
     //request to get the records
     response = httpRequest httpMode: 'POST',
@@ -42,11 +38,12 @@ def call(auth, zoneid, serviceName,lab, loadBalancer,findrURL,portrAuthURL) {
             url: portrAuthURL,
             customHeaders:[[name:'Authorization', value:"Basic ${auth}"]]
     def authJson = jsonParse(response.content)
-    def findrId = getFindrRecord(zoneid,findrURL,authJson,serviceName)
     def dns = serviceName
     if (lab.length() > 0) {
         dns = dns + '.' + lab;
     }
+    def findrId = getFindrRecord(zoneid,findrURL,authJson,dns)
+
 
     //add record if it not already present
     if (findrId.length() == 0) {
