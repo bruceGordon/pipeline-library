@@ -43,13 +43,13 @@ def call(auth,serviceName,location,org,namespace,cluster,findrZone, findrUsernam
                 "    \"namespace\": \"" + namespace + "\",                          " +
                 "    \"renewalDays\": 30,                                           " +
                 "    \"findrZone\":  \"" + findrZone + "\",                         " +
-                "    \"findrZoneName\":\"" + zoneName + "\",                   " +
+                "    \"findrZoneName\":\"" + zoneName + "\",                        " +
                 "    \"findrUsername\": \"" + findrUsername + "\",                  " +
-                "    \"findrRecord\": \"" + findrRecord + "\",                  " +
-                "    \"endpoint\": \"" + endpoint + "\",                  " +
-                "    \"subject\": \"" + url "\",       " +
+                "    \"findrRecord\": \"" + findrRecord + "\",                      " +
+                "    \"endpoint\": \"" + endpoint + "\",                            " +
+                "    \"subject\": \"" + url + "\",                                  " +
                 "    \"findrPassword\": \"" + findrPassword + "\",                  " +
-                "    \"findrRecordName\": \"" + serviceName + lab +"\"                    " +
+                "    \"findrRecordName\": \"" + serviceName + lab +"\"              " +
                 "}                                                                  " +
                 "}"
         print payload
