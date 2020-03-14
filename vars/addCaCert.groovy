@@ -5,7 +5,7 @@ def jsonParse(def json) {
     new groovy.json.JsonSlurperClassic().parseText(json)
 }
 
-def call(auth,serviceName,location,org,namespace,cluster,findrZone, findrUsername, findrPassword,lab,findrRecord,endpoint) {
+def call(auth,serviceName,location,org,namespace,cluster,findrZone, findrUsername, findrPassword,lab,findrRecord,endpoint,zoneName) {
 
     print "-----------------addCaCert------------------------------"
     echo "Input Parameters serviceName = ${serviceName}, org = ${org}, namespace = ${namespace} , cluster = ${cluster},  lab = ${lab}, findrRecord = ${findrRecord} ,endpoint = ${endpoint} "
