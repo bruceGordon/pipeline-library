@@ -10,8 +10,9 @@ def call(auth,serviceName,location,org,namespace,cluster,findrZone, findrUsernam
     print "-----------------addCaCert------------------------------"
     echo "Input Parameters serviceName = ${serviceName}, org = ${org}, namespace = ${namespace} , cluster = ${cluster},  lab = ${lab}, findrRecord = ${findrRecord} ,endpoint = ${endpoint} "
 
+    def dns = serviceName
     if (lab.length() > 0) {
-        url = url + '.' + lab;
+        dns = dns + '.' + lab;
     }
 
     //initial authentication
@@ -47,9 +48,9 @@ def call(auth,serviceName,location,org,namespace,cluster,findrZone, findrUsernam
                 "    \"findrUsername\": \"" + findrUsername + "\",                  " +
                 "    \"findrRecord\": \"" + findrRecord + "\",                      " +
                 "    \"endpoint\": \"" + endpoint + "\",                            " +
-                "    \"subject\": \"" + url + "\",                                  " +
+                "    \"subject\": \"" + dns + "\",                                  " +
                 "    \"findrPassword\": \"" + findrPassword + "\",                  " +
-                "    \"findrRecordName\": \"" + serviceName + lab +"\"              " +
+                "    \"findrRecordName\": \"" + dns +"\"              " +
                 "}                                                                  " +
                 "}"
         print payload
