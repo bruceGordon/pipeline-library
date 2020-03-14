@@ -49,7 +49,7 @@ def call(auth, zoneid, serviceName,lab, loadBalancer,findrURL,portrAuthURL) {
     if (findrId.length() == 0) {
         print "create findr record"
         def payload2 = [
-                name: serviceName,
+                name: dns,
                 ttl: 3600,
                 type: "A",
                 values: [loadBalancer]
