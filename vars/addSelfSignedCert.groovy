@@ -51,7 +51,7 @@ def call(auth,serviceName,location,org,namespace,cluster,lab,zoneName) {
                 "    \"subjectAlternativeNames\": [                                 " +
                 "        {                                                          " +
                 "            \"type\": \"DNS\",                                     " +
-                "            \"value\": \"" + url + "\",                            " +
+                "            \"value\": \"" + url + "\"                             " +
                 "        }                                                          " +
                 "    ]                                                              " +
                 "}                                                                  " +
