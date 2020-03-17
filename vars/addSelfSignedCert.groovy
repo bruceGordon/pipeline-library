@@ -9,7 +9,7 @@ def call(auth,serviceName,location,org,namespace,cluster,lab,zoneName) {
 
     print "-----------------addSelfSignedCert------------------------------"
 
-    echo "Input Parameters serviceName = ${serviceName}, org = ${org}, cluster = ${cluster}, lab = ${lab} "
+    echo "Input Parameters serviceName = ${serviceName}, location = ${location} ,namespace = ${namespace},org = ${org}, cluster = ${cluster}, lab = ${lab} "
 
     def dns = serviceName
     if (lab != "prod") {
